@@ -1,29 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-service
+  name: cart-service
   labels:
-    app: user-service
+    app: cart-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: user-service
+      app: cart-service
   template:
     metadata:
       labels:
-        app: user-service
+        app: cart-service
     spec:
       containers:
-        - name: user-service
-          image: ghcr.io/your-org/user-service:latest
+        - name: cart-service
+          image: ghcr.io/your-org/cart-service:latest
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 8003
+            - containerPort: 8002
               name: http
           env:
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
-                  name: user-service-secrets
+                  name: cart-service-secrets
                   key: database-url

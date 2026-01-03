@@ -64,10 +64,10 @@ uv sync
 Start the application with hot reload:
 
 ```
-uv run uvicorn main:app --reload
+uv run uvicorn main:app --reload --port 8003
 ```
 
-Navigate to `http://127.0.0.1:8000/docs` for the interactive Swagger UI or `http://127.0.0.1:8000/redoc` for Redoc.
+Navigate to `http://127.0.0.1:8003/docs` for the interactive Swagger UI or `http://127.0.0.1:8003/redoc` for Redoc.
 
 ## Containerization
 
@@ -75,7 +75,7 @@ Build and run the Docker image locally:
 
 ```
 docker build -t user-service:latest .
-docker run --rm -p 8000:8000 --env DATABASE_URL=sqlite:///./test.db user-service:latest
+docker run --rm -p 8003:8003 --env DATABASE_URL=sqlite:///./test.db user-service:latest
 ```
 
 Add production-ready environment variables through secrets or orchestration tooling; SQLite is suitable only for development.

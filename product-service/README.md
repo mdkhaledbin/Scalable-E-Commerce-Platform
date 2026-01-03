@@ -29,7 +29,7 @@ FastAPI microservice that manages the product catalog for the scalable ecommerce
 Start Uvicorn pointing at the FastAPI app factory output:
 
 ```bash
-uvicorn main:app --host 0.0.0.0 --port 8002 --reload
+uvicorn main:app --host 0.0.0.0 --port 8001 --reload
 ```
 
 During startup the service loads environment variables, creates the database schema (if missing), and mounts the API router.

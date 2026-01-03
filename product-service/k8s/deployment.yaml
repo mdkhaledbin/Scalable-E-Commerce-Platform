@@ -19,7 +19,7 @@ spec:
           image: ghcr.io/your-org/product-service:latest
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 8000
+            - containerPort: 8001
               name: http
           env:
             - name: DATABASE_URL
