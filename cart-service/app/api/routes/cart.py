@@ -10,7 +10,6 @@ from app.schemas import (
     CartItemUpdate,
     CartCreate,
     CartRead,
-    CartUpdate,
 )
 
 from typing import Annotated
@@ -60,7 +59,7 @@ def create_cart(payload: CartCreate, db: DbSession) -> CartRead:
     if existing is not None:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Cart already exists")
 
-    cart = Cart(user_id=payload.user_id, status=payload.status)
+    cart = Cart(user_id=payload.user_id)
     for item in payload.items:
         cart.items.append(_materialize_item(item))
 
@@ -86,18 +85,6 @@ def add_item(user_id: int, item: CartItemCreate, db: DbSession) -> CartRead:
 
     db.commit()
     return _reload_cart(db, cart.id)
-
-
-@router.patch("/status/{user_id}", summary="Update cart status", response_model=CartRead)
-def update_cart(user_id: int, payload: CartUpdate, db: DbSession) -> CartRead:
-    if payload.status is None:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Nothing to update")
-
-    cart = _get_cart_or_404(db, user_id)
-    if payload.status is not None:
-        cart.status = payload.status
-
-    db.commit()
     return _reload_cart(db, cart.id)
 
 

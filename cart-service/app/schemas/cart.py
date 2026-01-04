@@ -33,17 +33,12 @@ class CartItemRead(CartItemBase):
 
 
 class CartBase(BaseModel):
-    status: str = Field(default="PENDING", min_length=3, max_length=20)
     user_id: int = Field(gt=0)
     items: List[CartItemCreate] = Field(default_factory=list)
 
 
 class CartCreate(CartBase):
     pass
-
-
-class CartUpdate(BaseModel):
-    status: Optional[str] = Field(default=None, min_length=3, max_length=20)
 
 
 class CartRead(CartBase):
